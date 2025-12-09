@@ -1,0 +1,65 @@
+### Health
+GET http://localhost:3000/health
+
+### Register
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Alice",
+  "email": "alice@example.com",
+  "password": "pass123",
+  "role": "student"
+}
+
+### Login
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "alice@example.com",
+  "password": "pass123"
+}
+
+### Events list
+GET http://localhost:3000/api/events
+
+### ML Attendance Risk - Safe Case
+POST http://localhost:3000/api/ml/attendance-risk
+Content-Type: application/json
+Authorization: Bearer YOUR_TOKEN_HERE
+
+{
+  "overall_att": 0.85,
+  "last7": 0.80,
+  "last30": 0.82,
+  "streak": 0,
+  "trend": 0.05
+}
+
+### ML Attendance Risk - At Risk Case
+POST http://localhost:3000/api/ml/attendance-risk
+Content-Type: application/json
+Authorization: Bearer YOUR_TOKEN_HERE
+
+{
+  "overall_att": 0.70,
+  "last7": 0.55,
+  "last30": 0.60,
+  "streak": 1,
+  "trend": -0.05
+}
+
+### ML Attendance Risk - High Risk Case
+POST http://localhost:3000/api/ml/attendance-risk
+Content-Type: application/json
+Authorization: Bearer YOUR_TOKEN_HERE
+
+{
+  "overall_att": 0.65,
+  "last7": 0.50,
+  "last30": 0.55,
+  "streak": 3,
+  "trend": -0.10
+}
+
