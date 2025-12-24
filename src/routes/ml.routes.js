@@ -1,16 +1,14 @@
 import express from 'express'
 import { requireAuth, requireRole } from '../middlewares/auth.js'
-import { predictAttendanceRisk } from '../controllers/ml.controller.js'
+import { predictAttendanceRisk, predictComplaint, predictPlacement } from '../controllers/ml.controller.js'
 
 export const router = express.Router()
 
-router.post('/attendance-risk', requireAuth, predictAttendanceRisk)
+router.post('/predict-attendance', requireAuth, predictAttendanceRisk)
 
-router.post('/complaint-category', requireAuth, async (req, res) => {
-  const { title, description } = req.body
-  const category = (title + ' ' + (description || '')).toLowerCase().includes('hostel') ? 'hostel' : 'general'
-  res.json({ category, confidence: 0.6 })
-})
+router.post('/predict-complaint', requireAuth, predictComplaint)
+
+router.post('/predict-placement', requireAuth, predictPlacement)
 
 router.post('/attendance-pattern', requireAuth, requireRole('staff', 'admin'), async (req, res) => {
   const { attendance } = req.body // array of dates or counts

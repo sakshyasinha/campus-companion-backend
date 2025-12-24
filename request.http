@@ -25,7 +25,7 @@ Content-Type: application/json
 GET http://localhost:3000/api/events
 
 ### ML Attendance Risk - Safe Case
-POST http://localhost:3000/api/ml/attendance-risk
+POST http://localhost:3000/api/ml/predict-attendance
 Content-Type: application/json
 Authorization: Bearer YOUR_TOKEN_HERE
 
@@ -38,7 +38,7 @@ Authorization: Bearer YOUR_TOKEN_HERE
 }
 
 ### ML Attendance Risk - At Risk Case
-POST http://localhost:3000/api/ml/attendance-risk
+POST http://localhost:3000/api/ml/predict-attendance
 Content-Type: application/json
 Authorization: Bearer YOUR_TOKEN_HERE
 
@@ -51,7 +51,7 @@ Authorization: Bearer YOUR_TOKEN_HERE
 }
 
 ### ML Attendance Risk - High Risk Case
-POST http://localhost:3000/api/ml/attendance-risk
+POST http://localhost:3000/api/ml/predict-attendance
 Content-Type: application/json
 Authorization: Bearer YOUR_TOKEN_HERE
 
@@ -61,5 +61,107 @@ Authorization: Bearer YOUR_TOKEN_HERE
   "last30": 0.55,
   "streak": 3,
   "trend": -0.10
+}
+
+### ML Complaint Prediction - Normal Case
+POST http://localhost:3000/api/ml/predict-complaint
+Content-Type: application/json
+Authorization: Bearer YOUR_TOKEN_HERE
+
+{
+  "complaint_text": "The hostel wifi is not working properly and keeps disconnecting"
+}
+
+### ML Complaint Prediction - Another Case
+POST http://localhost:3000/api/ml/predict-complaint
+Content-Type: application/json
+Authorization: Bearer YOUR_TOKEN_HERE
+
+{
+  "complaint_text": "The canteen food quality is very poor and unhygienic"
+}
+
+### ML Complaint Prediction - Empty Text Error
+POST http://localhost:3000/api/ml/predict-complaint
+Content-Type: application/json
+Authorization: Bearer YOUR_TOKEN_HERE
+
+{
+  "complaint_text": ""
+}
+
+### ML Placement Prediction - Low Chance Case
+POST http://localhost:3000/api/ml/predict-placement
+Content-Type: application/json
+Authorization: Bearer YOUR_TOKEN_HERE
+
+{
+  "cgpa": 8.1,
+  "backlogs": 1,
+  "attendance": 82,
+  "technical_skills": {
+    "python": 1,
+    "java": 1,
+    "sql": 0,
+    "dsa": 1,
+    "dbms": 1,
+    "os": 0,
+    "ml_basics": 1
+  },
+  "profile_strength": {
+    "projects_count": 3,
+    "internship": 1,
+    "hackathon": 0
+  }
+}
+
+### ML Placement Prediction - High Chance Case
+POST http://localhost:3000/api/ml/predict-placement
+Content-Type: application/json
+Authorization: Bearer YOUR_TOKEN_HERE
+
+{
+  "cgpa": 9.2,
+  "backlogs": 0,
+  "attendance": 95,
+  "technical_skills": {
+    "python": 1,
+    "java": 1,
+    "sql": 1,
+    "dsa": 1,
+    "dbms": 1,
+    "os": 1,
+    "ml_basics": 1
+  },
+  "profile_strength": {
+    "projects_count": 5,
+    "internship": 1,
+    "hackathon": 1
+  }
+}
+
+### ML Placement Prediction - Medium Chance Case
+POST http://localhost:3000/api/ml/predict-placement
+Content-Type: application/json
+Authorization: Bearer YOUR_TOKEN_HERE
+
+{
+  "cgpa": 7.5,
+  "backlogs": 0,
+  "attendance": 85,
+  "technical_skills": {
+    "python": 1,
+    "java": 1,
+    "sql": 1,
+    "dsa": 0,
+    "dbms": 1,
+    "os": 0,
+    "ml_basics": 0
+  },
+  "profile_strength": {
+    "projects_count": 2,
+    "internship": 1,
+    "hackathon": 0
+  }
 }
 
